@@ -31,12 +31,16 @@ public class Task1 implements PlugIn {
                 .filter(tokens -> tokens.length > 1)
                 .flatMap(tokens -> {
                     List<Pair> list = new LinkedList<>();
-                    for (int i = 0; i < tokens.length - 1; i++) {
-                        int x = Integer.parseInt(tokens[i]);
-                        int y = Integer.parseInt(tokens[i + 1]);
-                        Pair pair = new Pair(x, y);
+                    for (int i = 0; i < tokens.length; i++) {
+                        for (int j = 0; j < tokens.length; j++) {
+                            if (i == j) continue;
 
-                        list.add(pair);
+                            int x = Integer.parseInt(tokens[i]);
+                            int y = Integer.parseInt(tokens[j]);
+
+                            Pair pair = new Pair(x, y);
+                            list.add(pair);
+                        }
                     }
                     return list.stream();
                 })
