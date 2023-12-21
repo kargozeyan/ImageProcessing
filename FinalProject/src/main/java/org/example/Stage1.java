@@ -3,6 +3,7 @@ package org.example;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.process.ColorProcessor;
+import org.apache.commons.io.FilenameUtils;
 import org.example.utils.Resources;
 
 import java.awt.*;
@@ -16,7 +17,7 @@ public class Stage1 {
         Resources.getFileNames("CSHandwriting")
                 .stream()
                 .map(Path::toFile)
-                .map(f -> new String[]{f.getAbsolutePath(), f.getName()})
+                .map(f -> new String[]{f.getAbsolutePath(), FilenameUtils.getBaseName(f.getName())})
                 .forEach(Stage1::eliminatePrintedTextAndInstructorMarks);
     }
 
@@ -37,7 +38,7 @@ public class Stage1 {
                 }
             }
         }
-        IJ.saveAs(image, "png", new File(Resources.PROCESSED_IMAGE_PATH).getAbsolutePath() + File.separator + imageData[1]);
+        IJ.saveAs(image, "png", new File(Resources.PROCESSED_IMAGE_PATH).getAbsolutePath() + File.separator + imageData[1] + "_bin");
         image.close();
     }
 
