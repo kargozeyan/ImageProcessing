@@ -1,10 +1,9 @@
-package org.example;
+package org.example.stage3;
 
 import ij.IJ;
 import ij.ImagePlus;
 import ij.process.ImageProcessor;
 import org.apache.commons.io.FilenameUtils;
-import org.example.stage3.HoughTransformer;
 import org.example.utils.Resources;
 
 import java.nio.file.Path;
@@ -24,11 +23,6 @@ public class Stage3 {
     private static void drawBaseLines(String[] imageData) {
         System.out.println(imageData[1]);
         ImagePlus imagePlus = IJ.openImage(imageData[0]);
-
-        if (imagePlus == null) {
-            System.err.println("Error: Could not open the image.");
-            return;
-        }
 
         ImageProcessor ip = imagePlus.getProcessor();
         ip.autoThreshold();
